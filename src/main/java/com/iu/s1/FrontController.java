@@ -40,6 +40,7 @@ public class FrontController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("================================================");
 		System.out.println("Front Controller 실행");
 		String uri = request.getRequestURI();
 		//String url = request.getRequestURL().toString();
@@ -57,7 +58,12 @@ public class FrontController extends HttpServlet {
 		
 		
 		if(path.equals("/member")) {
-			memberController.start(request);
+			try {
+				memberController.start(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}else if(path.equals("/bankbook")) {
 			bankbookController.start(request, response);

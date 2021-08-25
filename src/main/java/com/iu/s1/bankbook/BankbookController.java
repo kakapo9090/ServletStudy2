@@ -34,6 +34,8 @@ public class BankbookController {
 				System.out.println(bankbookDTO.getBookName());
 			}
 			
+			request.setAttribute("list", ar);
+			
 			RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/bankbook/bankbookList.jsp");
 			try {
 				view.forward(request, response);
@@ -43,8 +45,63 @@ public class BankbookController {
 			}
 			
 			
+/** ============================================================  */			
+			
+			
+			//url이 같은 주소를 메서드로 구분
 		}else if(path.equals("bankbookInsert.do")) {
 			System.out.println("상품등록 진행");
+			
+			String method =request.getMethod();
+			System.out.println("Method : "+method);
+			if(method.equals("POST")) {
+				//POST방식
+				//파라미터값 출력
+				System.out.println("Insert 2");
+				String bookName= request.getParameter("bookName");
+				String bookRate = request.getParameter("bookRate");
+				String bookSale = request.getParameter("bookSale");		
+				BankbookDTO bankbookDTO = new BankbookDTO();
+				bankbookDTO.setBookName(bookName);
+				bankbookDTO.setBookRate(Double.parseDouble(bookRate));
+				bankbookDTO.setBookSale(Integer.parseInt(bookSale));
+			
+				int result = bankbookDAO.setInsert(bankbookDTO);
+				System.out.println(result);
+				//리스트 만들어주기
+//				ArrayList<BankbookDTO> ar = bankbookDAO.getList();
+//				request.setAttribute("list", ar);
+			
+				//리다이렉트 방식
+				try {
+					response.sendRedirect("./bankbookList.do");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+			}else {
+				//GET방식
+				RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/bankbook/bankbookInsert.jsp");
+				try {
+					view.forward(request, response);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
+			
+		
+			
+	
+			
+/** ============================================================= */
+			
+			
 		}else if(path.equals("bankbookSelect.do")) {
 			System.out.println("상품상세조회");
 			String num = request.getParameter("bookNumber");
@@ -56,6 +113,8 @@ public class BankbookController {
 			bankbookDTO.setBookNumber(num2);
 			bankbookDTO = bankbookDAO.getSelect(bankbookDTO);
 			System.out.println(bankbookDTO.getBookName());
+			
+			request.setAttribute("dto", bankbookDTO);
 			
 			RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/bankbook/bankbookSelect.jsp");
 			try {
