@@ -10,6 +10,10 @@
 <body>
 	<h1>Bankbook Select Page</h1>
 	<%
+		//session
+		//application
+		//page
+		//pageContext.
 		String num = request.getParameter("bookNumber");
 		Object obj = request.getAttribute("dto");
 		BankbookDTO bankbookDTO = (BankbookDTO)obj;

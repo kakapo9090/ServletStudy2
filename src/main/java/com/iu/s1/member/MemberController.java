@@ -18,7 +18,9 @@ public class MemberController {
 	public void start(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("MemberController 실행");
 		String uri = request.getRequestURI();
+		System.out.println("uri : "+uri);
 		int index= uri.lastIndexOf("/");
+		System.out.println("lastIndexOf 리턴값 int타입 : "+index);
 		
 		
 		String path= uri.substring(index+1);
@@ -34,6 +36,9 @@ public class MemberController {
 			String pw = request.getParameter("pw");
 			System.out.println(pw);
 			
+			
+			
+			
 			// 인서트문
 		}else if(path.equals("memberJoin.do")) {
 			System.out.println("회원가입 진행");	
@@ -43,12 +48,13 @@ public class MemberController {
 			if(method.equals("POST")) {
 				int result = memberService.memberJoin(request, response);	
 				if(result>0) {
+					System.out.println("Insert 완료");
 					response.sendRedirect("../");
 				}else {
 					response.sendRedirect("./memberJoin.do");
 				}
 				
-			}else {
+			}else {//getMethod의 값이 GET이 나오면 jsp이동
 				RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/member/memberJoin.jsp");
 					view.forward(request, response);
 			}
@@ -60,6 +66,9 @@ public class MemberController {
 			
 		}else if(path.equals("memberPage.do")) {
 			System.out.println("마이페이지 진행");
+			
+			
+			
 		}else {
 			System.out.println("그 외 나머지");
 		}

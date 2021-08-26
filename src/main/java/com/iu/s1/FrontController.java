@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.iu.s1.bankbook.BankbookController;
 import com.iu.s1.member.MemberController;
@@ -28,7 +31,7 @@ public class FrontController extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public FrontController() {
-    	super();
+    	super(); // HttpServlet 생성자 호출
     	memberController = new MemberController();
     	bankbookController = new BankbookController();
         
@@ -40,10 +43,17 @@ public class FrontController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletConfig sc = getServletConfig();
+		HttpSession session = request.getSession();
+		ServletContext context = session.getServletContext();
+		context = getServletContext();
+		
+		
 		System.out.println("================================================");
 		System.out.println("Front Controller 실행");
 		String uri = request.getRequestURI();
 		//String url = request.getRequestURL().toString();
+		System.out.println("스트링버퍼 URL : "+request.getRequestURL());
 		System.out.println("uri : " +uri);
 		//System.out.println("url : " +url);
 		
@@ -54,9 +64,9 @@ public class FrontController extends HttpServlet {
 		int startIndex = request.getContextPath().toString().length();
 		int lastIndex = uri.lastIndexOf("/");
 		path = uri.substring(startIndex, lastIndex);
+		System.out.println("uri주소에서 컨텍스트 주소 뺀 폴더명 : "+path);
 		
-		
-		
+		//폴더명이 /member인 경우
 		if(path.equals("/member")) {
 			try {
 				memberController.start(request, response);
@@ -64,7 +74,7 @@ public class FrontController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+		//폴더명이 /bankbook인 경우	
 		}else if(path.equals("/bankbook")) {
 			bankbookController.start(request, response);
 			

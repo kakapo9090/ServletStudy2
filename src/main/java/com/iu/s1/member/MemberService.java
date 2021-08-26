@@ -11,7 +11,7 @@ public class MemberService {
 		memberDAO = new MemberDAO();
 	}
 	
-	
+	//컨트롤러와 DAO 사이에서 중개해주는 메서드 => 양식에서 받은 값들을 DTO에 담는 역할
 	public int memberJoin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(request.getParameter("id"));
