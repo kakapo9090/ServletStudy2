@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+*{
+	color: Red;
+}
+
+h3{
+	color: blue;
+}
+
+#t1{
+	color: lime;
+	border: red 1px solid;
+	
+}
+
+.c1{
+	color: black;
+}
+
+h1{
+	font-size: 100px;
+	/* border-top       3가지요소 색,크기,스타일 */
+	border-top-color: lime;
+	border-top-width: 3px;
+	border-top-style: solid;
+	
+	/* border-right */
+	border-right-color: red;
+	border-right-width: 5px;
+	border-right-style: dotted;
+	
+	/* <숏핸드>: 순서 상관 없음 */
+	border-bottom: blue dotted 3px;
+}
+
+/* #t3, h2{
+	font-size: 50px;
+} */
+
+
+.c2{
+	font-size: 30px;
+}
+
+#circle{
+	border: 5px solid red;
+	width: 200px;
+	height: 200px;
+	
+	border-radius: 10px 40px 10px 40px;
+}
