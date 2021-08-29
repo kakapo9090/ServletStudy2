@@ -4,8 +4,17 @@
 	border: red solid 3px;
 	border-spacing: 2px;
 	border-collapse: separate;
+	width: 70%;
+	margin: 0 auto;
 }
 
 .tbl_tr{
 	border: blue dotted 2px;
+}
+
+#title{
+	margin: 0 auto;
+	width: 70%;
+	background-color: yellow;
+	text-align: center;
 }

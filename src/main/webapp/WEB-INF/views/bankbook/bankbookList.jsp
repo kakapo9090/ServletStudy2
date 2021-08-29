@@ -16,13 +16,13 @@
 <link href="../css/list.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Bankbook List Page BY JSTL</h1>
+	<h1 id="title">Bankbook List Page3 BY JSTL</h1>
 	
 	<table class="tbl">
 		<tr>
 			<th class="tbl_tr">일련번호</th><th class="tbl_tr">제품명</th><th class="tbl_tr">이자율</th><th class="tbl_tr">Status</th>
 		</tr>
-		<!-- 태그 >>  속성-->
+		<!-- <태그  속성> -->
 		<c:forEach items="${list}" var="dto" varStatus="i">
 		<tr>
 			<td class="tbl_tr">${dto.bookNumber} </td>
